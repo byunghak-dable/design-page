@@ -59,6 +59,7 @@ const getp5ModeState = () => {
 }
 
 // -------------------------------- p5 를 사용해 페이지 위에 마우스로 스케치 기능 관련 --------------------------------
+// p5 instance 모드를 실행하기 위한 초기 설정 값을 담고있는 콜백 메소드
 const setUpP5 = sketch => {
   p5Sketch = sketch
   sketch.setup = () => {
@@ -72,24 +73,50 @@ const setUpP5 = sketch => {
 
   sketch.draw = () => {
     sketch.stroke(0)
-    sketch.strokeWeight(4)
+    sketch.strokeWeight(3)
     if (sketch.mouseIsPressed) {
       sketch.line(sketch.mouseX, sketch.mouseY, sketch.pmouseX, sketch.pmouseY)
     }
   }
 }
 
+// p5 캔버스 + 그릴 수 있는 기능 시작 (인스턴스 모드)
 const startP5 = () => {
   new p5(setUpP5)
-  p5Sketch.cursor('grab')
 }
 
-const pauseSketchMode = () => {
-  p5Sketch.noLoop()
-}
-
+// 캔버스를 지우는 메소드 : 스케치 모드 disable 됬을 때 사용자가 그렸던 모든 정보 삭제
 const deleteCanvas = () => {
   p5Canvas.remove()
+}
+
+// 스케치 잠시 일시정지 하는 버튼 handling하는 메소드
+const togglePlayController = () => {
+  let state = JSON.parse(getSketchControlStatus().payload)
+
+  if (state == null) {
+    saveSketchControlStatus(false)
+    p5Sketch.noLoop()
+  } else {
+    state = state ? false : true
+    saveSketchControlStatus(state)
+
+    if (state) p5Sketch.loop()
+    else p5Sketch.noLoop()
+  }
+  return { type: 'toggle-sketching', payload: state }
+}
+
+// 스케치 모드 잠시 멈추거나 다시 스케치할 수 있도록하는 설정 정보 가져오는 메소드
+const getSketchControlStatus = () => {
+  const state = sessionStorage.getItem('p5-sketch-state')
+
+  return { type: 'get-p5-sketch-state', payload: JSON.parse(state) }
+}
+
+// 스케치 모드 잠시 멈추거나 다시 스케치할 수 있도록하는 설정 정보 저장하는 메소드
+const saveSketchControlStatus = payload => {
+  sessionStorage.setItem('p5-sketch-state', payload)
 }
 
 // -------------------------------- 캡처 기능 관련 --------------------------------
@@ -134,7 +161,8 @@ const actions = {
   'get-mode-state': getDesignModeState,
   'toggle-p5-mode': toggleP5mode,
   'get-p5-mode-state': getp5ModeState,
-  'pause-sketch-mode': pauseSketchMode,
+  'toggle-sketching': togglePlayController,
+  'get-p5-sketch-state': getSketchControlStatus,
   'capture-tab': captureVisibleTab,
   'draw-image': drawImage,
 }
