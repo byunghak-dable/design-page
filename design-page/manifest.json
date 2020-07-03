@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Capture All",
+  "name": "Disign Page",
   "version": "0.1.0",
   "description": "A tool for users to alter a web page.",
   "icons": { "128": "images/plugin_logo_128.png" },
