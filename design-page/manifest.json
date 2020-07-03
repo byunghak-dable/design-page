@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Capture All",
+  "version": "0.1.0",
+  "description": "A tool for users to alter a web page.",
+  "icons": { "128": "images/plugin_logo_128.png" },
+  "permissions": ["activeTab", "<all_urls>"],
+  "background": {
+    "persistent": false,
+    "scripts": ["js/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "images/plugin_logo_19.png",
+    "default_title": "Manipulate Page",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["lib/p5.min.js", "js/content.js"],
+      "css": ["style.css"]
+    }
+  ]
+}
