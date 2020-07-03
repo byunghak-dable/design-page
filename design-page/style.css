@@ -1,0 +1,87 @@
+* {
+  /* margin: 0; */
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  text-decoration: none;
+  --page-background-color: #f5f5f5;
+  --main-background-color: #61bfad;
+  --footer-background-color: rgb(255, 255, 255);
+  --input-background-color: #cee0e0;
+}
+
+.main {
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.action-box__box {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.action-box__title {
+  align-self: center;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.action-box__btn {
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 5px;
+  cursor: pointer;
+  font: icon;
+  background-color: rgb(139, 195, 233);
+  color: white;
+}
+
+.action-box__btn.active {
+  background-color: red;
+}
+
+.sketch-setting {
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: gray;
+  margin: 10px 0 0 20px;
+}
+
+.sketch-setting__box {
+  padding: 5px;
+}
+
+.sketch-setting__btn {
+  cursor: pointer;
+}
+
+.btn--play-controller.active {
+  color: red;
+}
+
+.btn--screen-shot {
+  width: 80vw;
+  padding: 5px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin: 30px 0 20px 0;
+  font-size: 1rem;
+  background-color: rgb(139, 195, 233);
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
