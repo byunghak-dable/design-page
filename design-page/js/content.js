@@ -169,6 +169,7 @@ const actions = {
 
 // 메시지를 받아 그에 따른 필요한 작업을 하는 메소든
 chrome.runtime.onMessage.addListener((request, sender, response) => {
+  // MEMO : && 논리 연산자로 앞의 값이 참이면 뒤의 값을 반환, 그렇지 않으면 앞의 값을 반환
   const reply = actions[request.type] && actions[request.type](request.payload)
   reply && response(reply)
 })

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Dictionary",
+  "version": "0.1.0",
+  "description": "A simple dictionary",
+  "icons": { "128": "images/plugin_logo_128.png" },
+  "permissions": ["activeTab", "<all_urls>"],
+  "background": {
+    "persistent": false,
+    "scripts": ["js/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "images/plugin_logo_19.png",
+    "default_title": "Dictionary",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content.js"],
+      "css": ["style.css"]
+    }
+  ]
+}
